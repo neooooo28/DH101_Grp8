@@ -1,9 +1,6 @@
-# DH101_Grp4
-Final project for Digital Humanities 101, a class at UCLA teaching students about complementing humanistic questions with data analysis.
+# Analysis of Los Angeles arrest data from 2010 to 2020
+This will be the repository for the final project for Digital Humanities 101, a class at UCLA teaching students about complementing humanistic questions with data analysis.
 
-## Project
-
-Analysis of Los Angeles arrest data from 2010 to 2020
 
 ### Collaborators
 
