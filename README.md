@@ -6,8 +6,8 @@ This will be the repository for the final project for Digital Humanities 101, a 
 
 - Emmy Cao
 - Isabela Devia
-- Bonnie Lee
 - Lisa Kaunitz
+- Bonnie Lee
 - Patricia Njo
 - Jericho Villareal
 
