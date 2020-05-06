@@ -4,9 +4,9 @@ Source: [LA City Arrest Data](https://data.lacity.org/A-Safe-City/Arrest-Data-fr
 
 This dataset includes the following charge groups:
 
-1. Driving Under Influence
-2. Drunkenness
-3. Liquor Laws 
+1. Driving Under Influence (last updated: 4/11/2020)
+2. Drunkenness (last updated: 4/10/2020)
+3. Liquor Laws (last updated: 4/5/2020)
 
 Each dataset consist of these columns:
 
