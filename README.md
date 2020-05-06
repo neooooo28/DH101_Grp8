@@ -4,10 +4,10 @@ This will be the repository for the final project for Digital Humanities 101, a 
 
 ### Collaborators
 
-- Emmy Cao
-- Isabela Devia
-- Lisa Kaunitz
-- Bonnie Lee
-- Patricia Njo
-- Jericho Villareal
+- Emmy Cao (Web Specialist)
+- Isabela Devia (Data Visualization Specialist)
+- Lisa Kaunitz (Content Specialist)
+- Bonnie Lee (Project Manager)
+- Patricia Njo (Data Specialist)
+- Jericho Villareal (Mapping Specialist)
 
