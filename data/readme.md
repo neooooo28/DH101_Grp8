@@ -2,7 +2,7 @@
 
 Source: [LA City Arrest Data](https://data.lacity.org/A-Safe-City/Arrest-Data-from-2010-to-Present/yru6-6re4)
 
-This dataset includes the following charge groups:
+This folder contains the following datasets on 3 charge groups:
 
 1. Driving Under Influence (last updated: 4/11/2020)
 2. Drunkenness (last updated: 4/10/2020)
