@@ -18,11 +18,11 @@ Each dataset consist of these columns:
 - `descent`: [str] 19 unique descents
 - `charge_group`: [str] 3 charges: Driving Under Influence, Drunkeness, Liquor Laws
 - `charge_desc`: [str] charge description
-- `arrest_type`: [str] 4 types: Misdemeanor, Felony, Infraction
+- `arrest_type`: [str] 3 types: Misdemeanor, Felony, Infraction
 - `rep_dist`: [int] LAPD reporting district
 - `latitude`: [int] latitude y-axis
 - `longitude`: [int] longitude x-axis
-- `year`: [int] year of arrest
-- `month`: [str] month of arrest 
-- `day`: [str] day of arrest
+- `year`: [int] year of arrest (2010, 2011, ... , 2020)
+- `month`: [str] month of arrest (Jan, Feb, ... , Dec)
+- `day`: [str] day of arrest (Sun, Mon, ... , Sat)
 
