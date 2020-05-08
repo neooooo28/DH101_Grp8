@@ -1,0 +1,144 @@
+---
+title: "Data Cleaning 2.0"
+date: "5/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Loading Libraries
+```{r}
+# Data Table for faster computing
+library(data.table) # CORE
+library(dtplyr)     # data.table + dplyr
+
+# This project will use the package `data.table()` which handles reading data much faster than `data.frame()` or `tibble()`. 
+# In order to compromise with writing new syntax, I am also using the package `dtplyr()` which is a wrapper for `data.table()` but with the same syntax as `dplyr()`.
+
+# Data Wrangling
+library(readr)
+library(stringr)    # string manipulation
+library(dplyr)
+library(tidyr) 
+library(magrittr)   # pipes %>% 
+library(lubridate)  # handling dates
+library(tidyverse)
+
+# Plotting
+library(ggplot2)
+library(colorspace)
+```
+
+## 2. Cleaning Scripts
+```{r}
+# Load data
+df <- fread("la_arrest.csv")
+
+# Select columns of interest and rename them
+df <- df[,.(arrest_date=`Arrest Date`,               # [date] (mm/dd/yyyy)
+            time=`Time`,                             # [num] Range: 0000-2400
+            area_name=`Area Name`,                   # [fct] 21 unique LA patrol areas
+            age=`Age`,                               # [num] Range: 0-97
+            sex=`Sex Code`,                          # [fct] Female/Male
+            descent=`Descent Code`,                  # [fct] 19 unique descents
+            charge_group=`Charge Group Description`, # [fct] 28 unique charge groups
+            charge_desc=`Charge Description`,        # [fct] Unique description that defines the charge provided
+            arrest_type=`Arrest Type Code`,          # [fct] 5 unique arrest types
+            rep_dist=`Reporting District`,           # [fct] 1352 unique LAPD reporting districts
+            location=`Location`)                     # [num] (Latitude, Longitude)
+         ]  
+
+# Split location to latitude and longitude
+df <- df %>% 
+  cbind(df[,(location)] %>% 
+          # Before: (lat, long) - 1 column
+          str_replace_all("[()]","") %>% 
+          str_split_fixed(", ", n=2) %>% 
+          # After: lat | long - 2 columns
+          as.data.table() %>% 
+          
+          # Rename columns
+          transmute(latitude = as.numeric(V1), 
+                    longitude = as.numeric(V2)) %>% 
+          as.data.table()
+  ) %>% 
+
+# Remove location data
+select(-location)
+
+# Remove latitude and longitude outliers
+df <- df %>% 
+  .[latitude > 1, ] %>% 
+  .[longitude < -1, ]
+```
+
+## 3. Modifying Date and Time Formats
+```{r}
+# Modify arrest date and time
+df <- df[, `:=`(arrest_date = mdy(arrest_date))] %>% 
+  as.data.table()
+
+df <- df %>% 
+  mutate(time = format(strptime(substr(as.POSIXct(sprintf("%04.0f", time), 
+                                                  format="%H%M"), 12, 16), '%H:%M'), '%I:%M %p')) %>%
+  
+# Add year, month, and day of arrest
+  mutate(year = lubridate::year(arrest_date),
+        month = lubridate::month(arrest_date, label=TRUE, abbr=TRUE), 
+        day = lubridate::wday(arrest_date, label=TRUE, abbr=TRUE)) 
+```
+
+## 4. Changing Codes into Descriptions
+```{r}
+# Change sex code to sex object
+df$sex <- str_replace(df$sex, "F", "Female")
+df$sex <- str_replace(df$sex, "M", "Male")
+
+# Change descent code to descent object
+df$descent <- str_replace(df$descent, "A", "Other Asian")
+df$descent <- str_replace(df$descent, "B", "Black")
+df$descent <- str_replace(df$descent, "C", "Chinese")
+df$descent <- str_replace(df$descent, "D", "Cambodian")
+df$descent <- str_replace(df$descent, "F", "Filipino")
+df$descent <- str_replace(df$descent, "G", "Guamanian")
+df$descent <- str_replace(df$descent, "H", "Hispanic")
+df$descent <- str_replace(df$descent, "I", "American Indian/Alaskan Native")
+df$descent <- str_replace(df$descent, "J", "Japanese")
+df$descent <- str_replace(df$descent, "K", "Korean")
+df$descent <- str_replace(df$descent, "L", "Laotian")
+df$descent <- str_replace(df$descent, "O", "Other")
+df$descent <- str_replace(df$descent, "P", "Pacific Islander")
+df$descent <- str_replace(df$descent, "S", "Samoan")
+df$descent <- str_replace(df$descent, "U", "Hawaiian")
+df$descent <- str_replace(df$descent, "V", "Vietnamese")
+df$descent <- str_replace(df$descent, "W", "White")
+df$descent <- str_replace(df$descent, "X", "Unknown")
+df$descent <- str_replace(df$descent, "Z", "Asian Indian")
+
+# Change arrest type code into arrest type object
+df$arrest_type <- str_replace(df$arrest_type, "D", "Dependent")
+df$arrest_type <- str_replace(df$arrest_type, "F", "Felony")
+df$arrest_type <- str_replace(df$arrest_type, "I", "Infraction")
+df$arrest_type <- str_replace(df$arrest_type, "M", "Misdemeanor")
+df$arrest_type <- str_replace(df$arrest_type, "O", "Other")
+```
+
+## 5. Saving Cleaned Data (2010-2019) into A New File
+```{r}
+df_new <- df[df$year %in% c("2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"),]
+fwrite(df_new, "la_arrest2.csv")
+```
+
+## 6. Creating 3 New Files: Drunkeness, DUI, Liquor Laws
+```{r}
+df_drunkeness <- df_new[df_new$charge_group == "Drunkeness",]
+fwrite(df_drunkeness, "drunkeness.csv")
+
+df_dui <- df_new[df_new$charge_group == "Driving Under Influence",]
+fwrite(df_dui, "dui.csv")
+
+df_liquorlaws <- df_new[df_new$charge_group == "Liquor Laws",]
+fwrite(df_liquorlaws, "liquorlaws.csv")
+```
