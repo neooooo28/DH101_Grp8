@@ -1,11 +1,8 @@
-##  Data-Driven Narrative of Underage Drinking Arrests in LA
+##  [Data-Driven Narrative of Underage Drinking Arrests in LA](https://lacrime.humspace.ucla.edu/narrative/)
 
 This will be the repository for the final project for Digital Humanities 101, a class at UCLA teaching students about complementing humanistic questions with data analysis.
 
-### [Website: Upsilon Alpha Delta](https://lacrime.humspace.ucla.edu/narrative/)
-
 The analysis revolves around the underage (18 to 20 years old) drinking arrests in Los Angeles from 2010 to 2019. 
-
 [Data from Los Angeles Police Department](https://data.lacity.org/A-Safe-City/Arrest-Data-from-2010-to-Present/yru6-6re4)
 
 
