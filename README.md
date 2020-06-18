@@ -18,5 +18,12 @@ This will be the repository for the final project for Digital Humanities 101, a 
 
 ### Sample Photos
 
+![](https://github.com/neooooo28/DH101_Grp8/blob/master/uad_photos/Screenshot_1.png)
+
+![](https://github.com/neooooo28/DH101_Grp8/blob/master/uad_photos/Screenshot_2.png)
+
+![](https://github.com/neooooo28/DH101_Grp8/blob/master/uad_photos/Screenshot_3.png)
+
+
 
 
