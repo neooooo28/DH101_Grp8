@@ -25,6 +25,13 @@ The analysis revolves around the underage (18 to 20 years old) drinking arrests 
 
 ![](https://github.com/neooooo28/DH101_Grp8/blob/master/uad_photos/Screenshot_3.png)
 
+![](https://github.com/neooooo28/DH101_Grp8/blob/master/uad_photos/Screenshot_4.png)
+
+![](https://github.com/neooooo28/DH101_Grp8/blob/master/uad_photos/Screenshot_5.png)
+
+![](https://github.com/neooooo28/DH101_Grp8/blob/master/uad_photos/Screenshot_6.png)
+
+![](https://github.com/neooooo28/DH101_Grp8/blob/master/uad_photos/Screenshot_7.png)
 
 
 
