@@ -13,7 +13,7 @@ The analysis revolves around the underage (18 to 20 years old) drinking arrests 
 - Lisa Kaunitz
 - Bonnie Lee
 - Patricia Njo
-- Jericho Villareal
+- Jericho Villareal 
 
 ***
 
